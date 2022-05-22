@@ -1,5 +1,4 @@
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../../../utils/axios";
 import { Switch } from "@headlessui/react";
@@ -9,42 +8,7 @@ import BrandPage from "../../../BrandPage/BrandPage";
 import swal from "sweetalert";
 
 const Register = () => {
-  const [data, setData] = useState({});
   const navigate = useNavigate();
-
-  const getData = async () => {
-    try {
-      const response = await axiosInstance.get("/auth/data");
-      if (response.status === 200) {
-        setData(response.data.result);
-      }
-    } catch (err) {
-      if (!err?.response) {
-        swal({
-          title: "No Server Response",
-          icon: "error",
-        });
-      } else if (err.response?.status === 401) {
-        /* Unauthorized */
-        swal({
-          title: err.response.data.status_message,
-          icon: "error",
-        });
-        console.log();
-      } else if (err.response?.status === 404) {
-        /* Not found */
-        swal({
-          title: err.response.data.status_message,
-          icon: "error",
-        });
-      } else {
-        swal({
-          title: "Request Error, try again later",
-          icon: "error",
-        });
-      }
-    }
-  };
 
   const registerUser = async () => {
     const teamID = values.teamID ? values.teamID : uuid();
@@ -99,10 +63,6 @@ const Register = () => {
       }
     }
   };
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   const initialValues = {
     userName: "",
@@ -269,11 +229,8 @@ const Register = () => {
             <option value="" disabled selected hidden>
               Select a Role
             </option>
-            {data.Rol?.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
+            <option value="Team Leader">Team Leader</option>
+            <option value="Team Member">Team Member</option>
           </select>
           {errors.role && touched.role && (
             <div className="text-sm text-red-500">{errors.role}</div>
@@ -296,11 +253,9 @@ const Register = () => {
             <option value="" disabled selected hidden>
               Select a Continent
             </option>
-            {data.continente?.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
+            <option value="America">America</option>
+            <option value="Europa">Europe</option>
+            <option value="Otro">Other</option>
           </select>
           {errors.continent && touched.continent && (
             <div className="text-sm text-red-500">{errors.continent}</div>
@@ -323,11 +278,9 @@ const Register = () => {
                 <option value="" disabled selected hidden>
                   Select a Region
                 </option>
-                {data.region?.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
+                <option value="Latam">Latam</option>
+                <option value="Brazil">Brazil</option>
+                <option value="Otro">Other</option>
               </select>
               {errors.region && touched.region && (
                 <div className="text-sm text-red-500">{errors.region}</div>

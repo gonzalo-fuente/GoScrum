@@ -133,7 +133,7 @@ const Login = () => {
 
           {/* Login */}
           <button type="submit" className="btn w-full mt-4 mb-2">
-            Login
+            Log In
           </button>
           <Link to="/register" replace={true}>
             <span className="text-sm hover:text-primary-500 cursor-pointer">
