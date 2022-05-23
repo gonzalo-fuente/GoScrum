@@ -6,18 +6,28 @@ import debounce from "lodash.debounce";
 const TaskFilter = ({ taskList, setFilteredList }) => {
   const [titleSearch, setTitleSearch] = useState("");
   const [createdBy, setCreatedBy] = useState("ALL");
+  const [priority, setPriority] = useState("ALL");
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    let filteredList = [];
     if (titleSearch) {
-      setFilteredList(
-        taskList.filter((task) => task.title.startsWith(titleSearch))
+      filteredList = taskList.filter((task) =>
+        task.title.startsWith(titleSearch)
       );
     } else {
-      setFilteredList(taskList);
+      filteredList = taskList;
     }
-  }, [titleSearch]);
+
+    if (priority === "ALL") {
+      setFilteredList(filteredList);
+    } else {
+      setFilteredList(
+        filteredList.filter((task) => task.importance === priority)
+      );
+    }
+  }, [titleSearch, priority, taskList]);
 
   useEffect(() => {
     dispatch(getTasks(createdBy === "ALL" ? "" : "me"));
@@ -32,13 +42,7 @@ const TaskFilter = ({ taskList, setFilteredList }) => {
   }, 500);
 
   const handleChangePriority = (event) => {
-    if (event.currentTarget.value === "ALL") {
-      setFilteredList(taskList);
-    } else {
-      setFilteredList(
-        taskList.filter((task) => task.importance === event.currentTarget.value)
-      );
-    }
+    setPriority(event.currentTarget.value);
   };
 
   return (
@@ -95,6 +99,7 @@ const TaskFilter = ({ taskList, setFilteredList }) => {
       <select
         className="block w-full text-gray-700 py-2 px-3 border bg-inherit border-gray-300 rounded-2xl shadow-sm"
         name="imṕortance"
+        value={priority}
         onChange={handleChangePriority}
       >
         <option value="" disabled selected hidden>

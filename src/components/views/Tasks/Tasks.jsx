@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getTasks,
-  deleteTask,
-  editTask,
-} from "../../../store/actions/tasksActions";
+import { deleteTask, editTask } from "../../../store/actions/tasksActions";
 
 import swal from "sweetalert";
 import Card from "../../Card/Card";
