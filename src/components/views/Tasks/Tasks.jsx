@@ -10,7 +10,7 @@ import debounce from "lodash.debounce";
 import swal from "sweetalert";
 import Card from "../../Card/Card";
 import Header from "../../Header/Header";
-import TaskForm from "../../TaskForm/TaskForm";
+import CreateTask from "../../CreateTask/CreateTask";
 import SkeletonCards from "../../SkeletonCards/SkeletonCards";
 
 const Tasks = () => {
@@ -114,7 +114,7 @@ const Tasks = () => {
     <>
       <Header />
       <main className="px-4 mx-auto grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:px-8">
-        <TaskForm />
+        <CreateTask />
         <section className="w-full mx-auto mt-4 lg:col-span-2">
           <h2 className="text-lg font-semibold mb-4">My Tasks</h2>
           {/* Task Filter */}
