@@ -10,8 +10,8 @@ function Header() {
   const { tasks } = useSelector((state) => state.tasksReducer);
 
   const handleLogOut = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userName");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("userName");
     navigate("/login", { replace: true });
   };
 
@@ -42,7 +42,7 @@ function Header() {
               </li>
               <li className="flex items-center gap-2 py-2 pl-3 border-b border-gray-100 md:border-0 md:p-0">
                 <FaUser className="" />
-                <p className="">{localStorage.getItem("userName")}</p>
+                <p className="">{sessionStorage.getItem("userName")}</p>
               </li>
               <li>
                 <button

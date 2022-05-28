@@ -27,7 +27,7 @@ export const taskCreated = () => ({
 export const getTasks = (path) => async (dispatch) => {
   dispatch(tasksRequest());
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (token) {
     axiosInstance.defaults.headers["Authorization"] = "Bearer " + token;
   }
@@ -44,7 +44,7 @@ export const getTasks = (path) => async (dispatch) => {
 export const createTask = (data) => async (dispatch) => {
   dispatch(tasksRequest());
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (token) {
     axiosInstance.defaults.headers["Authorization"] = "Bearer " + token;
   }
@@ -78,7 +78,7 @@ export const editTask = (data) => async (dispatch) => {
   };
   delete task.task._id;
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (token) {
     axiosInstance.defaults.headers["Authorization"] = "Bearer " + token;
   }
@@ -98,7 +98,7 @@ export const editTask = (data) => async (dispatch) => {
 export const deleteTask = (id) => async (dispatch) => {
   dispatch(tasksRequest());
 
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (token) {
     axiosInstance.defaults.headers["Authorization"] = "Bearer " + token;
   }
