@@ -58,25 +58,44 @@ export const createTask = (data) => async (dispatch) => {
   }
 };
 
-export const editTask = (data) => async (dispatch) => {
+export const editTask = (data, type) => async (dispatch) => {
   dispatch(tasksRequest());
-
-  const newStatus =
-    data.status === "NEW"
-      ? "IN PROGRESS"
-      : data.status === "IN PROGRESS"
-      ? "FINISHED"
-      : "NEW";
 
   const task = {
     task: {
       title: data.title,
       importance: data.importance,
-      status: newStatus,
+      status: data.status,
       description: data.description,
     },
   };
-  delete task.task._id;
+
+  switch (type) {
+    case "status":
+      const newStatus =
+        data.status === "NEW"
+          ? "IN PROGRESS"
+          : data.status === "IN PROGRESS"
+          ? "FINISHED"
+          : "NEW";
+
+      task.task.status = newStatus;
+      break;
+
+    case "importance":
+      const newImportance =
+        data.importance === "LOW"
+          ? "MEDIUM"
+          : data.importance === "MEDIUM"
+          ? "HIGH"
+          : "LOW";
+
+      task.task.importance = newImportance;
+      break;
+
+    default:
+      break;
+  }
 
   const token = sessionStorage.getItem("token");
   if (token) {

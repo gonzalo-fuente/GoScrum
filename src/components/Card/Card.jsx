@@ -3,7 +3,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Card = ({
   deleteCard,
-  editCardStatus,
+  editCard,
   data,
   data: {
     _id,
@@ -44,11 +44,11 @@ const Card = ({
               ? "bg-yellow-500"
               : "bg-green-500"
           } px-2 py-1 text-white rounded`}
-          onClick={() => editCardStatus(data)}
+          onClick={() => editCard(data, "status")}
         >
           {status}
         </button>
-        <span
+        <button
           className={`${
             importance === "HIGH"
               ? "bg-primary-500"
@@ -56,9 +56,10 @@ const Card = ({
               ? "bg-yellow-500"
               : "bg-blue-500"
           } px-2 py-1 text-white rounded`}
+          onClick={() => editCard(data, "importance")}
         >
           {importance}
-        </span>
+        </button>
       </div>
       <p className="mb-3 font-normal text-gray-700">
         {readMore ? limitString(description) : description}

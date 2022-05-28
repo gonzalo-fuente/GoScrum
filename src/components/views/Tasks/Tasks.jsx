@@ -29,12 +29,12 @@ const Tasks = () => {
           key={task._id}
           data={task}
           deleteCard={handleDelete}
-          editCardStatus={handleEditStatus}
+          editCard={handleEditCard}
         />
       ));
 
-  const handleEditStatus = (data) => {
-    dispatch(editTask(data));
+  const handleEditCard = (data, type) => {
+    dispatch(editTask(data, type));
   };
 
   const handleDelete = (id) => {
