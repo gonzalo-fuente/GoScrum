@@ -1,8 +1,11 @@
+import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { useEffect } from "react";
 import * as Yup from "yup";
 
-const TaskForm = ({ atSubmit, reset }) => {
+const TaskForm = ({ atSubmit, reset, editId, setEditId }) => {
+  const { tasks } = useSelector((state) => state.tasksReducer);
+
   const initialValues = {
     title: "",
     status: "",
@@ -17,6 +20,11 @@ const TaskForm = ({ atSubmit, reset }) => {
       },
     };
     atSubmit(task);
+  };
+
+  const handleCancel = () => {
+    resetForm();
+    setEditId(null);
   };
 
   const required = "* This field is required";
@@ -40,9 +48,21 @@ const TaskForm = ({ atSubmit, reset }) => {
     handleSubmit,
     handleBlur,
     resetForm,
+    setFieldValue,
     touched,
     errors,
   } = formik;
+
+  useEffect(() => {
+    if (editId) {
+      const [task] = tasks.filter((task) => task._id === editId);
+      console.log(tasks, editId, task);
+      setFieldValue("title", task.title);
+      setFieldValue("status", task.status);
+      setFieldValue("importance", task.importance);
+      setFieldValue("description", task.description);
+    }
+  }, [editId]);
 
   useEffect(() => {
     if (reset) {
@@ -55,9 +75,11 @@ const TaskForm = ({ atSubmit, reset }) => {
       className="text-sm p-5 mx-auto border-2 rounded-lg shadow-sm border-gray-100 bg-white"
       onSubmit={handleSubmit}
     >
-      <h2 className="text-gray-800 text-lg font-semibold mb-1">Create Task</h2>
+      <h2 className="text-gray-800 text-lg font-semibold mb-1">{`${
+        editId ? "Edit" : "Create"
+      } Task`}</h2>
       <p className="text-sm font-normal text-gray-600 mb-7">
-        Create your Team Tasks !
+        {`${editId ? "Edit" : "Create"} your Team Tasks !`}
       </p>
 
       {/* Title */}
@@ -141,10 +163,21 @@ const TaskForm = ({ atSubmit, reset }) => {
         <div className="text-sm text-red-500">{errors.description}</div>
       )}
 
-      {/* Create Task */}
-      <button type="submit" className="btn w-full mt-4 mb-2">
-        Create Task
-      </button>
+      {/* Create or Edit Task */}
+      {editId ? (
+        <div className="flex gap-3">
+          <button type="submit" className="btn flex-grow mt-4 mb-2">
+            Edit Task
+          </button>
+          <button className="btn flex-grow mt-4 mb-2" onClick={handleCancel}>
+            Cancel
+          </button>
+        </div>
+      ) : (
+        <button type="submit" className="btn w-full mt-4 mb-2">
+          Create Task
+        </button>
+      )}
     </form>
   );
 };

@@ -93,6 +93,10 @@ export const editTask = (data, type) => async (dispatch) => {
       task.task.importance = newImportance;
       break;
 
+    case "task":
+      task.task = { ...data.task };
+      break;
+
     default:
       break;
   }
@@ -107,7 +111,11 @@ export const editTask = (data, type) => async (dispatch) => {
       JSON.stringify(task)
     );
     if (response.status === 200) {
-      dispatch(getTasks(""));
+      if (type === "task") {
+        dispatch(taskCreated());
+      } else {
+        dispatch(getTasks(""));
+      }
     }
   } catch (error) {
     dispatch(tasksFailure(error));

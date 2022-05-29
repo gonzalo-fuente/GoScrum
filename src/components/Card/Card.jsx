@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaPencilAlt,
+  FaRegTrashAlt,
+} from "react-icons/fa";
 
 const Card = ({
   deleteCard,
@@ -26,11 +31,11 @@ const Card = ({
 
   return (
     <div className="mx-auto max-w-md mt-4 text-xs text-gray-900 p-6 bg-white rounded-lg border border-gray-200 shadow-md relative">
-      <div
-        className="absolute top-4 right-4 cursor-pointer text-primary-500"
-        onClick={() => deleteCard(_id)}
-      >
-        X
+      <div className="absolute top-4 right-4 cursor-pointer text-primary-500">
+        <div className="flex gap-2">
+          <FaPencilAlt onClick={() => editCard(data, "task")} />
+          <FaRegTrashAlt onClick={() => deleteCard(_id)} />
+        </div>
       </div>
       <h5 className="mb-2 text-sm font-bold tracking-tight ">{title}</h5>
       <time className="">{dateTime}</time>
