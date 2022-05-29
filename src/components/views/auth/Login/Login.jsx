@@ -16,8 +16,8 @@ const Login = () => {
       );
       if (response.status === 200) {
         const data = response.data.result;
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("userName", data.user.userName);
+        sessionStorage.setItem("token", data.token);
+        sessionStorage.setItem("userName", data.user.userName);
         navigate("/", { replace: true });
       }
     } catch (err) {

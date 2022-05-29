@@ -1,9 +1,14 @@
 import { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaPencilAlt,
+  FaRegTrashAlt,
+} from "react-icons/fa";
 
 const Card = ({
   deleteCard,
-  editCardStatus,
+  editCard,
   data,
   data: {
     _id,
@@ -26,11 +31,11 @@ const Card = ({
 
   return (
     <div className="mx-auto max-w-md mt-4 text-xs text-gray-900 p-6 bg-white rounded-lg border border-gray-200 shadow-md relative">
-      <div
-        className="absolute top-4 right-4 cursor-pointer text-primary-500"
-        onClick={() => deleteCard(_id)}
-      >
-        X
+      <div className="absolute top-4 right-4 cursor-pointer text-primary-500">
+        <div className="flex gap-2">
+          <FaPencilAlt onClick={() => editCard(data, "task")} />
+          <FaRegTrashAlt onClick={() => deleteCard(_id)} />
+        </div>
       </div>
       <h5 className="mb-2 text-sm font-bold tracking-tight ">{title}</h5>
       <time className="">{dateTime}</time>
@@ -44,11 +49,11 @@ const Card = ({
               ? "bg-yellow-500"
               : "bg-green-500"
           } px-2 py-1 text-white rounded`}
-          onClick={() => editCardStatus(data)}
+          onClick={() => editCard(data, "status")}
         >
           {status}
         </button>
-        <span
+        <button
           className={`${
             importance === "HIGH"
               ? "bg-primary-500"
@@ -56,9 +61,10 @@ const Card = ({
               ? "bg-yellow-500"
               : "bg-blue-500"
           } px-2 py-1 text-white rounded`}
+          onClick={() => editCard(data, "importance")}
         >
           {importance}
-        </span>
+        </button>
       </div>
       <p className="mb-3 font-normal text-gray-700">
         {readMore ? limitString(description) : description}
