@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/GoScrum/static/css/main.ce0fd212.css",
-    "main.js": "/GoScrum/static/js/main.7ad2dfc1.js",
+    "main.js": "/GoScrum/static/js/main.a73735d4.js",
     "static/js/246.cced22ff.chunk.js": "/GoScrum/static/js/246.cced22ff.chunk.js",
     "static/media/404.svg": "/GoScrum/static/media/404.0128feb0839980ad9423f74b947a051f.svg",
     "index.html": "/GoScrum/index.html",
     "main.ce0fd212.css.map": "/GoScrum/static/css/main.ce0fd212.css.map",
-    "main.7ad2dfc1.js.map": "/GoScrum/static/js/main.7ad2dfc1.js.map",
+    "main.a73735d4.js.map": "/GoScrum/static/js/main.a73735d4.js.map",
     "246.cced22ff.chunk.js.map": "/GoScrum/static/js/246.cced22ff.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ce0fd212.css",
-    "static/js/main.7ad2dfc1.js"
+    "static/js/main.a73735d4.js"
   ]
 }
