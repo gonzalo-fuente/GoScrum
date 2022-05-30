@@ -1,9 +1,13 @@
 import { Navigate } from "react-router-dom";
 
 const RequireAuth = ({ children }) => {
-  if (!sessionStorage.getItem("token")) {
+  const token = sessionStorage.getItem("token");
+
+  /* If the user isn't authenticated go to Login page */
+  if (!token) {
     return <Navigate to="/login" replace={true} />;
   }
+
   return children;
 };
 

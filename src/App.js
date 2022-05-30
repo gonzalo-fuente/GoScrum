@@ -2,9 +2,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { lazy, Suspense } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
-import RequireAuth from "./components/RequireAuth/RequireAuth";
 import CircleLoader from "./components/CircleLoader/CircleLoader";
 import Login from "./components/views/auth/Login/Login";
+import RequireAuth from "./components/RequireAuth/RequireAuth";
 import Register from "./components/views/auth/Register/Register";
 import Registered from "./components/views/auth/Registered/Registered";
 import Tasks from "./components/views/Tasks/Tasks";
@@ -36,20 +36,20 @@ const App = () => {
 
   return (
     <AnimatePresence exitBeforeEnter>
-      <Routes location={location} key={location.key}>
+      <Routes location={location} key={location.pathname}>
         <Route
           path="/"
           element={
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={pageTransition}
-            >
-              <RequireAuth>
+            <RequireAuth>
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={pageTransition}
+              >
                 <Tasks />
-              </RequireAuth>
-            </motion.div>
+              </motion.div>
+            </RequireAuth>
           }
         />
         <Route

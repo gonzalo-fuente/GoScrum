@@ -56,7 +56,6 @@ const TaskForm = ({ atSubmit, reset, editId, setEditId }) => {
   useEffect(() => {
     if (editId) {
       const [task] = tasks.filter((task) => task._id === editId);
-      console.log(tasks, editId, task);
       setFieldValue("title", task.title);
       setFieldValue("status", task.status);
       setFieldValue("importance", task.importance);

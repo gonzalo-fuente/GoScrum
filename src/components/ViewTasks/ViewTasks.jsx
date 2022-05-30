@@ -55,7 +55,6 @@ const ViewTasks = ({ setEditId }) => {
         title: "Unauthorized: Token Error",
         icon: "error",
       });
-      console.log();
     } else if (error.response?.status === 404) {
       /* Not found */
       swal({
