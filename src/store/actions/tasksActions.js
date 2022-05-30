@@ -1,10 +1,11 @@
-import { axiosInstance } from "../../utils/axios";
 import {
   TASKS_REQUEST,
   TASKS_SUCCESS,
   TASKS_FAILURE,
   TASK_CREATED,
 } from "../types";
+import { axiosInstance } from "../../utils/axios";
+import { changeValue } from "../../helpers";
 
 export const tasksRequest = () => ({
   type: TASKS_REQUEST,
@@ -72,25 +73,21 @@ export const editTask = (data, type) => async (dispatch) => {
 
   switch (type) {
     case "status":
-      const newStatus =
-        data.status === "NEW"
-          ? "IN PROGRESS"
-          : data.status === "IN PROGRESS"
-          ? "FINISHED"
-          : "NEW";
-
-      task.task.status = newStatus;
+      task.task.status = changeValue(
+        data.status,
+        "NEW",
+        "IN PROGRESS",
+        "FINISHED"
+      );
       break;
 
     case "importance":
-      const newImportance =
-        data.importance === "LOW"
-          ? "MEDIUM"
-          : data.importance === "MEDIUM"
-          ? "HIGH"
-          : "LOW";
-
-      task.task.importance = newImportance;
+      task.task.importance = changeValue(
+        data.importance,
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      );
       break;
 
     case "task":

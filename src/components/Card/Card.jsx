@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { limitString } from "../../helpers";
 import {
   FaChevronLeft,
   FaChevronRight,
@@ -23,11 +24,6 @@ const Card = ({
   const maxDescription = description.length > 170;
   const [readMore, setReadMore] = useState(maxDescription);
   const dateTime = new Date(createdAt).toLocaleString();
-
-  const limitString = (str) => {
-    if (str.length > 170) return str.slice(0, 167).concat("...");
-    return str;
-  };
 
   return (
     <div className="mx-auto max-w-md mt-4 text-xs text-gray-900 p-6 bg-white rounded-lg border border-gray-200 shadow-md relative">
